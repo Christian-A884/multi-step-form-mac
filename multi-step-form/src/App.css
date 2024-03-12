@@ -1,0 +1,69 @@
+#root {
+  --body-bg-color: #eff5ff;
+  --card-bg: white;
+  --border-color: #d6d9e6;
+  --denim: #022959;
+  --grey: #9699aa;
+  --light-blue: #abbcff;
+  --light-grey: #d6d9e6;
+  --orange: #ffaf7e;
+  --pink: #f9818e;
+  --purple: #483eff;
+  --red-errors: #ee374a;
+  --sky-blue: #bee2fd;
+  --very-light-grey: #f8f9ff;
+  --stroke: #979797;
+
+  /* text font */
+
+  --font-family: "Ubuntu";
+  --heading: 32px;
+  --body-L: 16px;
+  --body-M: 14px;
+  --body-S: 12px;
+
+  --bold: 700;
+  --regular: 400;
+
+  --line-height-body-L: 25px;
+}
+
+.form-main-bg {
+  display: grid;
+  position: relative;
+  grid-template-columns: auto auto;
+  /* grid-template-rows: 2fr 1fr; */
+
+  /* gap: 100px; */
+  width: 940px;
+  height: 600px;
+  background-color: white;
+  margin: 105px 250px;
+  border-radius: 15px;
+  filter: drop-shadow(2px 2px 15px #979797);
+  padding: 16px;
+
+
+}
+
+.form-button-container {
+  display: flex;
+  position: absolute;
+  bottom: 32px;
+  right: 100px;
+ 
+}
+
+.form-button {
+  width: 123px;
+  height: 48px;
+  background-color: var(--denim);
+  color: white;
+  font-size: var(--body-M);
+  font-weight: var(--regular);
+  border: none;
+  border-radius: 5px;
+
+}
+
+

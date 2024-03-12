@@ -1,0 +1,46 @@
+:root {
+ --body-bg-color: #EFF5FF;
+ --card-bg: white;
+ --border-color: #D6D9E6;
+ --denim:#022959;
+ --grey: #9699AA;
+ --light-blue: #ABBCFF;
+ --light-grey: #D6D9E6;
+ --orange: #FFAF7E;
+ --pink: #F9818E;
+ --purple: #483EFF;
+ --red-errors: #EE374A;
+ --sky-blue: #BEE2FD;
+ --very-light-grey: #F8F9FF;
+
+
+ /* text font */
+
+ --font-family: "Ubuntu";
+ --heading: 32px;
+ --body-L: 16px;
+ --body-M: 14px;
+ --body-S: 12px;
+
+ --bold: 700;
+ --regular: 400;
+
+ --line-height-body-L: 25px;
+
+
+
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  max-width:1440px;
+  height: 810px;
+  background-color: var(--sky-blue);
+  
+}
