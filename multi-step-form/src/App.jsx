@@ -15,13 +15,15 @@ function App() {
 
   return (
     // * Body-ul initial
+    
     <section className="flex flex-col relative h-[695px] w-[375px] bg-body_bg_color font-ubuntu">
-      <VerticalSideBar />
+      <MultiStepContext.Provider value={{step, setStep}}>
+        <VerticalSideBar />
 
       <div className="flex flex-col absolute top-[102px] px-6 py-8 mx-4 gap-4 bg-[white] w-[343px] h-auto shadow-md rounded-xl">
-        <MultiStepContext.Provider value={{step, setStep}}>
+      
           <MultiStepForm/>
-        </MultiStepContext.Provider>
+       
       </div>
       <div className="flex absolute items-center bottom-0 h-[72px] w-[375px] justify-between px-4 bg-[white]">
         {step > 0 && step <4 ? (
@@ -46,6 +48,7 @@ function App() {
         </button>) : null}
         
       </div>
+      </MultiStepContext.Provider>
     </section>
   );
 }

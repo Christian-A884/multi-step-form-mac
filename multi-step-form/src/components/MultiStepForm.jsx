@@ -7,16 +7,10 @@ import FinalStep from "./Steps/FinalStep";
 import ThankYou from "./Steps/ThankYou";
 
 const MultiStepForm = () => {
- const {step} = useContext(MultiStepContext)
- const steps = [<Step1 />, <Step2 />, <Step3 />, <FinalStep/>, <ThankYou/>];
+  const { step } = useContext(MultiStepContext);
+  const steps = [<Step1 key={Step1}/>, <Step2 key={Step2} />, <Step3 key={Step3} />, <FinalStep key={FinalStep} />, <ThankYou key={ThankYou} />];
 
-
-  return (
-    <>
-      {steps[step]}
-      
-    </>
-  );
+  return <>{steps[step]}</>;
 };
 
 export default MultiStepForm;
