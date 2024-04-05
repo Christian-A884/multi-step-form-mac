@@ -1,15 +1,15 @@
 import Switch from "../Switch/Switch";
-import { useState } from "react";
+import { useContext} from "react";
 // import { planCards } from "../../data";
 import { SwitchContext } from "../../providers/switch.provider";
 import PlanCard from "../PlanCard/PlanCard";
 
 const Step2 = () => {
+const {isSelected}=useContext(SwitchContext)
+  // const [isSelected, setIsSelected] = useState(false);
 
-  const [isSelected, setIsSelected] = useState(false);
-  
   return (
-    <SwitchContext.Provider value={{ isSelected, setIsSelected }}>
+    // <SwitchContext.Provider value={{ isSelected, setIsSelected }}>
       <div className="flex-col w-full gap-[24px]">
         <div className="flex flex-col gap-[9px] mb-[22px]">
           <h1 className="text-2xl font-bold text-denim">Select your plan</h1>
@@ -37,7 +37,7 @@ const Step2 = () => {
           </span>
         </div>
       </div>
-    </SwitchContext.Provider>
+    // </SwitchContext.Provider>
   );
 };
 

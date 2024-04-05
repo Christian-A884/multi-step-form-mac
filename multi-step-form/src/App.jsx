@@ -1,10 +1,14 @@
 import MultiStepForm from "./components/MultiStepForm.jsx";
+import { SwitchContext } from "./providers/switch.provider.jsx";
 import VerticalSideBar from "./components/VerticalSideBar/VerticalSideBar.jsx";
 import { MultiStepContext } from "./providers/multistep.jsx";
 import { useState } from "react";
+import { UserPlanContext } from "./providers/userplan.jsx";
 
 function App() {
   const [step, setStep] = useState(0);
+  const [isSelected, setIsSelected] = useState(false);
+  const [userPlan, setUserPlan] = useState({})
 
   // const [userData, setUserData] = useState([])
 
@@ -17,7 +21,9 @@ function App() {
     // * Body-ul initial
     
     <section className="flex flex-col relative h-[695px] w-[375px] bg-body_bg_color font-ubuntu">
+      <SwitchContext.Provider value={{isSelected, setIsSelected }}>
       <MultiStepContext.Provider value={{step, setStep}}>
+      <UserPlanContext.Provider value={{userPlan, setUserPlan}}> 
         <VerticalSideBar />
 
       <div className="flex flex-col absolute top-[102px] px-6 py-8 mx-4 gap-4 bg-[white] w-[343px] h-auto shadow-md rounded-xl">
@@ -48,7 +54,9 @@ function App() {
         </button>) : null}
         
       </div>
+      </UserPlanContext.Provider> 
       </MultiStepContext.Provider>
+      </SwitchContext.Provider>
     </section>
   );
 }

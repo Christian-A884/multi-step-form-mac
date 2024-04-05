@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import { UserPlanContext } from "../../providers/userplan";
+import { SwitchContext } from "../../providers/switch.provider";
+
 const FinalStep = () => {
+const {userPlan} = useContext(UserPlanContext)
+const {isSelected} = useContext(SwitchContext)
+
   return (
     <div className="flex flex-col w-full gap-[24px]">
       <div className="flex flex-col gap-[9px]">
@@ -11,11 +18,11 @@ const FinalStep = () => {
         <div className="flex flex-col bg-very_light_grey px-[24px] rounded-lg py-4">
           <div className="flex justify-between items-center border-b border-light_grey">
             <div className="flex flex-col justify-start items-start">
-              <p className="text-sm text-denim">Arcade (Monthly)</p>
+              <p className="text-sm text-denim">{userPlan.title} {!isSelected ? "(Monthly)" : "(Yearly)"}</p>
               <button className="text-sm text-grey underline pb-2 leading-5 ">Change</button>
             </div>
             <div>
-              <span className="text-sm text-denim font-bold ">$9/mo</span>
+              <span className="text-sm text-denim font-bold ">{!isSelected ? `${userPlan.price}` : `${userPlan.priceYear}`}</span>
             </div>
           </div>
 

@@ -15,12 +15,14 @@ export const addOns = [
     title: "Online service",
     details: "Acces multiplayer games",
     price: "+$1/mo",
+    priceYear: "+$10/yr"
   },
 
   {
     title: "Larger storage",
     details: "Extra 1TB cloud save",
     price: "+$2/mo",
+    priceYear: "+$20/yr"
  
   },
 
@@ -28,6 +30,8 @@ export const addOns = [
     title: "Customizable profile",
     details: "Custom theme on your profile",
     price: "+$2/mo",
+    priceYear: "+$20/yr"
 
   },
 ];
+console.log(addOns.map((addOpt)=>addOpt))
