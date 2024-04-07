@@ -1,25 +1,131 @@
-import VerticalSideBar from './components/VerticalSideBar/VerticalSideBar'
-import './App.css'
-import Multistep from './components/Multistep/Multistep'
-import { MultistepContext } from './providers/multistep.provider'
-import { useState } from 'react'
-function App() {
+import MultiStepForm from "./components/MultiStepForm.jsx";
+import { SwitchContext } from "./providers/switch.provider.jsx";
+import VerticalSideBar from "./components/VerticalSideBar/VerticalSideBar.jsx";
+import { useEffect, useState } from "react";
+import { addOns, plans } from "./data.js";
+import { useForm } from "react-hook-form";
 
-  const [step, setStep] = useState(0)
-  const [userData, setUserData] = useState([])
+function App() {
+  // step (view-ul afisat/pasul din form)
+  const [step, setStep] = useState(0);
+  // perioada pentru care se face achizitia (monthly/yearly)
+  const [period, setPeriod] = useState("monthly");
+  // planul selectat de utilizator
+  const [userPlan, setUserPlan] = useState(plans[0]);
+  // aici stocam care sunt addon-urile selectate (true daca este selectat/false daca nu este)
+  const [addonOptions, setAddonOptions] = useState({
+    "Online service": false,
+    "Larger storage": false,
+    "Customizable profile": false,
+  });
+  // aici stocam preturile addon-urilor in functie de perioada selectata (daca este anual sau lunar)
+  const [selectedAddonsWithPrice, setSelectedAddonsWithPrice] = useState([]);
+  // pretul total al achizitiei (in functie de plan, perioada, addon-uri)
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  // formularul din step1
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: "onBlur" });
+
+  useEffect(() => {
+    const addonArray = [];
+    // iteram prin addOnOptions (unde inregistram addon-urile selectate)
+    for (const key in addonOptions) {
+      // pentru primul addon, key = 'Online service'
+      // aici cautam pretul de la fiecare addon din addonOptions, folosindu-ne de addOns din data.js
+      const addonPrice = addOns.find((el) => el.title === key).monthlyPrice;
+      // daca addon-ul e selectat, adaug un obiect in array sub forma {name: -nume addon-, price: -pret addon, care, in situatia in care period e yearly, este inmultit cu 10 -}
+      if (addonOptions[key] === true) {
+        if (period === "monthly") {
+          addonArray.push({ name: key, price: addonPrice });
+        } else {
+          addonArray.push({ name: key, price: addonPrice * 10 });
+        }
+      }
+
+      // const finalPrice = planPrice
+    }
+
+    setSelectedAddonsWithPrice(addonArray);
+
+    const planPrice =
+      period === "monthly" ? userPlan.monthlyPrice : userPlan.monthlyPrice * 10;
+
+    let addOnsTotalPrice = 0;
+    addonArray.forEach((el) => (addOnsTotalPrice += el.price));
+
+    const totalPrice = planPrice + addOnsTotalPrice;
+
+    setTotalPrice(totalPrice);
+    console.log("1", planPrice);
+    console.log("2", addOnsTotalPrice);
+    console.log("3", totalPrice);
+  }, [period, userPlan, addonOptions]);
+
+  const handleNextStep = () => {
+    setStep((prev) => prev + 1);
+  };
 
   return (
-    <section className='form-main-bg'>
+    <section className="flex flex-col relative h-[695px] w-[375px] bg-body_bg_color font-ubuntu">
+      <SwitchContext.Provider
+        value={{
+          period,
+          setPeriod,
+          step,
+          setStep,
+          userPlan,
+          setUserPlan,
+          addonOptions,
+          setAddonOptions,
+          selectedAddonsWithPrice,
+          setSelectedAddonsWithPrice,
+          totalPrice,
+          register,
+          handleSubmit,
+          errors,
+        }}>
+        <VerticalSideBar />
 
-      <VerticalSideBar/>
-      <MultistepContext.Provider value={{step, setStep, userData, setUserData}}>
-       <Multistep/>
-        
-       </MultistepContext.Provider>
-     
+        <div className="flex flex-col absolute top-[102px] px-6 py-8 mx-4 gap-4 bg-[white] w-[343px] h-auto shadow-md rounded-xl">
+          <MultiStepForm />
+        </div>
+        <div className="flex absolute items-center bottom-0 h-[72px] w-[375px] justify-between px-4 bg-[white]">
+          {step > 0 && step < 4 ? (
+            <button
+              className="text-grey text-sm"
+              onClick={() => setStep(step - 1)}>
+              Go back
+            </button>
+          ) : (
+            <div></div>
+          )}
+          {step === 0 && (
+            <button
+              className="text-[white] text-sm bg-denim w-[97] h-10 px-4 rounded-md"
+              type="submit"
+              form="step1form">
+              Next step
+            </button>
+          )}
+
+          {step < 4 && step > 0 ? (
+            <button
+              className={`text-sm text-[white] ${
+                step === 4 ? "bg-purple" : "bg-denim"
+              }  h-10 w-[97] px-4 rounded-md`}
+              onClick={handleNextStep}>
+              {step === 4 ? "Confirm" : "Next step"}
+            </button>
+          ) : null}
+        </div>
+      </SwitchContext.Provider>
     </section>
-  )
- } 
+  );
+}
 
-
-export default App
+export default App;
