@@ -46,14 +46,11 @@ function App() {
           addonArray.push({ name: key, price: addonPrice * 10 });
         }
       }
-
-      // const finalPrice = planPrice
     }
 
     setSelectedAddonsWithPrice(addonArray);
 
-    const planPrice =
-      period === "monthly" ? userPlan.monthlyPrice : userPlan.monthlyPrice * 10;
+    const planPrice = period === "monthly" ? userPlan.monthlyPrice : userPlan.monthlyPrice * 10;
 
     let addOnsTotalPrice = 0;
     addonArray.forEach((el) => (addOnsTotalPrice += el.price));
@@ -61,9 +58,6 @@ function App() {
     const totalPrice = planPrice + addOnsTotalPrice;
 
     setTotalPrice(totalPrice);
-    console.log("1", planPrice);
-    console.log("2", addOnsTotalPrice);
-    console.log("3", totalPrice);
   }, [period, userPlan, addonOptions]);
 
   const handleNextStep = () => {
@@ -71,7 +65,7 @@ function App() {
   };
 
   return (
-    <section className="flex flex-col relative h-[695px] w-[375px] bg-body_bg_color font-ubuntu">
+    <section className="sm:flex flex-col relative h-[695px] w-[375px] bg-body_bg_color font-ubuntu md:h-[810px] md:w-[1440px]  md:flex-row md:absolute md:left-0">
       <SwitchContext.Provider
         value={{
           period,
@@ -88,38 +82,30 @@ function App() {
           register,
           handleSubmit,
           errors,
-        }}>
+        }}
+      >
         <VerticalSideBar />
 
-        <div className="flex flex-col absolute top-[102px] px-6 py-8 mx-4 gap-4 bg-[white] w-[343px] h-auto shadow-md rounded-xl">
+        <div className="flex flex-col absolute top-[102px] px-6 py-8 mx-4 gap-4 bg-[white] w-[343px] h-auto shadow-md rounded-xl md:h-[600px] md:w-[940px] md:pl-[400px] md:pr-[100px] md:py-14 md:left-[250px]">
           <MultiStepForm />
         </div>
-        <div className="flex absolute items-center bottom-0 h-[72px] w-[375px] justify-between px-4 bg-[white]">
+        <div className="flex absolute items-center bottom-0 h-[72px] w-[375px] justify-between px-4 bg-[white] md:left-[660px] md:bottom-[135px] md:w-[450px]">
           {step > 0 && step < 4 ? (
-            <button
-              className="text-grey text-sm"
-              onClick={() => setStep(step - 1)}>
+            <button className="text-grey text-sm" onClick={() => setStep(step - 1)}>
               Go back
             </button>
           ) : (
             <div></div>
           )}
           {step === 0 && (
-            <button
-              className="text-[white] text-sm bg-denim w-[97] h-10 px-4 rounded-md"
-              type="submit"
-              form="step1form">
+            <button className="text-[white] text-sm bg-denim w-[97] h-10 px-4 rounded-md" type="submit" form="step1form">
               Next step
             </button>
           )}
 
           {step < 4 && step > 0 ? (
-            <button
-              className={`text-sm text-[white] ${
-                step === 4 ? "bg-purple" : "bg-denim"
-              }  h-10 w-[97] px-4 rounded-md`}
-              onClick={handleNextStep}>
-              {step === 4 ? "Confirm" : "Next step"}
+            <button className={`text-sm text-[white] ${step === 3 ? "bg-purple" : "bg-denim"}  h-10 w-[97] px-4 rounded-md`} onClick={handleNextStep}>
+              {step === 3 ? "Confirm" : "Next step"}
             </button>
           ) : null}
         </div>

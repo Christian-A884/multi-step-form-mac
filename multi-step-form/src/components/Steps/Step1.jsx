@@ -12,24 +12,18 @@ const Step1 = () => {
 
   return (
     <form id="step1form" onSubmit={handleSubmit(onSubmit, onError)}>
-      <div className="flex flex-col">
+      <div className="flex flex-col md:gap-3">
         <h1 className="text-2xl font-bold text-denim">Personal info</h1>
-        <p className="text-base text-grey">
-          Please provide your name, email address and phone number
-        </p>
+        <p className="text-base text-grey">Please provide your name, email address and phone number</p>
       </div>
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col">
+      <div className="flex flex-col gap-4 md:mt-10 md:gap-6">
+        <div className="flex flex-col md:gap-1">
           <div className="flex justify-between">
             <label className="text-xs font-normal text-denim" htmlFor="name">
               Name
             </label>
 
-            {errors.name && (
-              <span className="text-red-600 text-sm">
-                {errors.name.message}
-              </span>
-            )}
+            {errors.name && <span className="text-red-600 text-xs">{errors.name.message}</span>}
           </div>
 
           <input
@@ -38,22 +32,18 @@ const Step1 = () => {
             placeholder="e.g Stephen King"
             type="text"
             {...register("name", {
-              required: "Introdu ceva",
+              required: "Please enter your name",
               minLength: { value: 4, message: "Numele tau e prea scurt" },
             })}
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col md:gap-1">
           <div className="flex justify-between">
             <label className="text-xs font-normal text-denim" htmlFor="email">
               Email address
             </label>
 
-            {errors.email && (
-              <span className="text-red-600 text-sm">
-                {errors.email.message}
-              </span>
-            )}
+            {errors.email && <span className="text-red-600 text-xs">{errors.email.message}</span>}
           </div>
           <input
             className="border rounded border-light_grey h-10 placeholder-grey-400 p-4 text-sm"
@@ -65,17 +55,13 @@ const Step1 = () => {
           />
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col md:gap-1">
           <div className="flex justify-between">
             <label className="text-xs font-normal text-denim" htmlFor="phone">
               Phone number
             </label>
 
-            {errors.phone && (
-              <span className="text-red-600 text-sm">
-                {errors.phone.message}
-              </span>
-            )}
+            {errors.phone && <span className="text-red-600 text-xs">{errors.phone.message}</span>}
           </div>
           <input
             className="border rounded border-light_grey h-10 placeholder-grey-40 px-4 text-sm"

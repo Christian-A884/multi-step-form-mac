@@ -27,4 +27,3 @@ export const addOns = [
     monthlyPrice: 2,
   },
 ];
-console.log(addOns.map((addOpt) => addOpt));

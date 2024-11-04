@@ -42,8 +42,6 @@
   border-radius: 15px;
   filter: drop-shadow(2px 2px 15px #979797);
   padding: 16px;
-
-
 }
 
 .form-button-container {
@@ -51,7 +49,6 @@
   position: absolute;
   bottom: 32px;
   right: 100px;
- 
 }
 
 .form-button {
@@ -63,7 +60,4 @@
   font-weight: var(--regular);
   border: none;
   border-radius: 5px;
-
 }
-
-
